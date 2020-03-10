@@ -12,7 +12,8 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     let sectionNames = ["Users", "Friends"]
     let userNames = ["Agu","Ayova","Leodan"]
-    
+    let friendNames = ["Pitu","Siro","Axelion","Morrowind","Coco","Pachán"]
+
     // outlet from the tableView, used to populate it ...
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,12 +35,38 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userNames.count
+        let sectionName = sectionNames[section]
+        switch sectionName {
+        case "Users":
+            return userNames.count
+        case "Friends":
+            return friendNames.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //get the cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "aCustomCell") as! UserTableViewCell
-        cell.configure(name: userNames[indexPath.row])
+        
+        let sectionName = sectionNames[indexPath.section]
+        switch sectionName {
+        case "Users":
+            cell.configure(name: userNames[indexPath.row])
+        case "Friends":
+            cell.configure(name: friendNames[indexPath.row])
+        default:
+            break
+        }
+//        //get the cell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "aCustomCell") as! UserTableViewCell
+        
+        //prepare / populate cell
+//        cell.configure(name: userNames[indexPath.row])
+        
+        //return populated cell
         return cell
     }
 

@@ -21,9 +21,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         tableView.delegate = self
         tableView.dataSource = self
+        let publicHolidays = PublicHolidays()
+        publicHolidays.retrieveAPIData(year: 2020, countryCode: "ES")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,12 +61,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         default:
             break
         }
-//        //get the cell
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "aCustomCell") as! UserTableViewCell
-        
+        //get the cell
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "aCustomCell") as! UserTableViewCell
         //prepare / populate cell
-//        cell.configure(name: userNames[indexPath.row])
-        
+        //cell.configure(name: userNames[indexPath.row])
         //return populated cell
         return cell
     }

@@ -9,22 +9,22 @@
 import UIKit
 
 class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     let sectionNames = ["Users", "Friends"]
     let userNames = ["Agu","Ayova","Leodan"]
     let friendNames = ["Pitu","Siro","Axelion","Morrowind","Coco","Pachán"]
-
+    
+    
     // outlet from the tableView, used to populate it ...
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
-        let publicHolidays = PublicHolidays()
-        publicHolidays.retrieveAPIData(year: 2020, countryCode: "ES")
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,12 +61,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         default:
             break
         }
-        //get the cell
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "aCustomCell") as! UserTableViewCell
-        //prepare / populate cell
-        //cell.configure(name: userNames[indexPath.row])
-        //return populated cell
+        
         return cell
     }
-
 }

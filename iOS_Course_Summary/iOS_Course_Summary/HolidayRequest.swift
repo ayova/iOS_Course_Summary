@@ -22,7 +22,7 @@ struct HolidayRequest: Decodable {
         ApiURL = URL(string: apiString)!
     }
     
-    func getHolidays(completion: @escaping(Result<[Holiday], Error>) -> Void) {
+    func getHolidays(completion: @escaping(Result<[Holiday], HolidayRequestError>) -> Void) {
         let request = URLSession.shared.dataTask(with: ApiURL) { data,_,_ in
             guard let jsonData = data else {
                 completion(.failure(HolidayRequestError.NoDataAvailable))

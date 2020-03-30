@@ -6,7 +6,6 @@
 //  Copyright © 2020 ADMIN. All rights reserved.
 //
 
-// API link - https://date.nager.at/api/v2/PublicHolidays/2020/ES
 
 
 import Foundation

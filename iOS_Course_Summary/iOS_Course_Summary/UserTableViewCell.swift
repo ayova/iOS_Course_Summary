@@ -10,10 +10,14 @@ import UIKit
 
 class UserTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var localNameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
-    func configure(name: String){
-        userNameLabel.text = name
+    func configure(name: String, localName: String, date: String){
+        nameLabel.text = name
+        localNameLabel.text = localName
+        dateLabel.text = date
     }
 
 }

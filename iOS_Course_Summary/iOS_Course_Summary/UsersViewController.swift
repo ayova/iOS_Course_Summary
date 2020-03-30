@@ -10,13 +10,30 @@ import UIKit
 
 class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let sectionNames = ["Users", "Friends"]
+    let sectionNames = ["Users", "Holidays"]
     let userNames = ["Agu","Ayova","Leodan"]
-    let friendNames = ["Pitu","Siro","Axelion","Morrowind","Coco","Pachán"]
-    
+    var listOfHolidays = [Holiday](){
+        didSet{
+            DispatchQueue.main.async {
+                self.tableView.reloadData() //reload the data displayed once loaded
+            }
+        }
+    }
     
     // outlet from the tableView, used to populate it ...
     @IBOutlet weak var tableView: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let holidayRequest = HolidayRequest(year: 2020, countryCode: "ES")
+        holidayRequest.getHolidays{[weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let holidays):
+                self?.listOfHolidays = holidays
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +57,8 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         switch sectionName {
         case "Users":
             return userNames.count
-        case "Friends":
-            return friendNames.count
+        case "Holidays":
+            return listOfHolidays.count
         default:
             return 0
         }
@@ -55,9 +72,9 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let sectionName = sectionNames[indexPath.section]
         switch sectionName {
         case "Users":
-            cell.configure(name: userNames[indexPath.row])
-        case "Friends":
-            cell.configure(name: friendNames[indexPath.row])
+            cell.configure(name: userNames[indexPath.row], localName: "", date: "")
+        case "Holidays":
+            cell.configure(name: listOfHolidays[indexPath.row].name, localName: listOfHolidays[indexPath.row].localName, date: listOfHolidays[indexPath.row].date)
         default:
             break
         }
